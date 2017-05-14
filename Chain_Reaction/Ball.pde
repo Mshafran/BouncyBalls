@@ -30,7 +30,6 @@ class Ball {
       y = y + dy;
       ellipse(x, y, rad, rad);
       fill(c);
-      collide();
     } else if (state == 1) {
       bigger();
     } else if (state == 2) {
@@ -52,6 +51,7 @@ class Ball {
     if (rad >= 100) {
       state = 2;
     }
+    ellipse(x, y, rad, rad);
   }
 
   void smaller() {
@@ -59,15 +59,14 @@ class Ball {
     if (rad <= 0) {
       state = 3;
     }
+    ellipse(x, y, rad, rad);      
   }
 
-  void collide( Ball[] arr) {
-    for (int i = 0; i < arr.length; i++) {
-      if (arr[i].state != 0 && arr[i].state != 3) {
-        if (dist(x, y, arr[i].x, arr[i].y) <= rad+arr[i].rad) {
+  void collide( Ball arr) {
+      if (arr.state != 0 && arr.state != 3) {
+        if (dist(x, y, arr.x, arr.y) <= rad+arr.rad) {
           state = 1;
         }
-      }
     }
   }
 }

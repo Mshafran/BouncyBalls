@@ -15,6 +15,9 @@ void draw() {
   background(0);
   for (int i=0; i< balls.length; i++) {
     balls[i].move();
+    for(int j = 0; j < balls.length; j++){
+     balls[i].collide(balls[j]); 
+    }
   }
   check();
 }
@@ -33,7 +36,7 @@ double dist( int bX, int bY, int mX, int mY ) {
 
 void mouseClicked() {
   reaction = true;
-  for (int i = 0; i < balls.size(); i++) {
+  for (int i = 0; i < balls.length; i++) {
     if ((int) dist(balls[i].x, balls[i].y, mouseX, mouseY) <= balls[i].rad*1.5) {
       balls[i].state = 1;
     }
