@@ -1,6 +1,8 @@
 Ball[] balls;
 
 boolean reaction;
+int mX;
+int mY;
 
 void setup() {
   size(600, 600);
@@ -15,12 +17,18 @@ void draw() {
   background(0);
   for (int i=0; i< balls.length; i++) {
     balls[i].move();
-    for(int j = 0; j < balls.length; j++){
-     balls[i].collide(balls[j]); 
+    if (reaction) {
+      if ((int) dist(balls[i].x, balls[i].y, mX, mY) <= balls[i].rad*1.5) {
+        balls[i].state = 1;
+      }
+      for (int j = 0; j < balls.length; j++) {
+        balls[i].collide(balls[j]);
+      }
     }
   }
   check();
 }
+
 
 void check() {
   for (int i = balls.length - 1; i >= 0; i--) {
@@ -34,11 +42,9 @@ double dist( int bX, int bY, int mX, int mY ) {
   return (double)Math.sqrt((Math.pow(bX - mX, 2)) + ((Math.pow(bY - mY, 2))));
 }
 
+
 void mouseClicked() {
   reaction = true;
-  for (int i = 0; i < balls.length; i++) {
-    if ((int) dist(balls[i].x, balls[i].y, mouseX, mouseY) <= balls[i].rad*1.5) {
-      balls[i].state = 1;
-    }
-  }
+  mX = mouseX;
+  mY = mouseY;
 }
