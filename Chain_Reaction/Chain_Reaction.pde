@@ -16,7 +16,6 @@ void setup() {
 void draw() {
   background(0);
   for (int i=0; i< balls.length; i++) {
-    balls[i].move();
     if (reaction) {
       if ((int) dist(balls[i].x, balls[i].y, mX, mY) <= balls[i].rad*1.5) {
         balls[i].state = 1;
@@ -25,6 +24,7 @@ void draw() {
         balls[i].collide(balls[j]);
       }
     }
+    balls[i].move();   
   }
   check();
 }

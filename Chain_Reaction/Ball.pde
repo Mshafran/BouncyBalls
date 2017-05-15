@@ -29,12 +29,12 @@ class Ball {
       x = x+dx;
       y = y + dy;
       ellipse(x, y, rad, rad);
-      fill(c);
     } else if (state == 1) {
       bigger();
     } else if (state == 2) {
       smaller();
     }
+    fill(c);
   }
 
   void bounce() {
@@ -59,14 +59,15 @@ class Ball {
     if (rad <= 0) {
       state = 3;
     }
-    ellipse(x, y, rad, rad);      
+    ellipse(x, y, rad, rad);
   }
 
   void collide( Ball arr) {
-      if (arr.state != 0 && arr.state != 3) {
-        if (dist(x, y, arr.x, arr.y) <= rad+arr.rad) {
-          state = 1;
-        }
+    if (arr.state != 0 && arr.state != 3) {
+      if (dist(x, y, arr.x, arr.y) <= (rad+arr.rad)/2) {
+        state = 1;
+      }
     }
   }
+
 }
